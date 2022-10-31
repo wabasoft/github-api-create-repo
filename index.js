@@ -5,7 +5,7 @@ const token = config.get('server.token');
 const repository = config.get('server.repository');
 const octokit = new Octokit({auth: token});
 const start = async (x, y) => {
-    await Promise.resolve(octokit.request('POST/orgs/' + organization + '/repos', {
+    await Promise.resolve(octokit.request('POST /orgs/' + organization + '/repos', {
         org: organization,
         name: repository,
         description: 'This is your first repository',

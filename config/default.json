@@ -1,6 +1,7 @@
 {
   "server": {
     "organization": "",
-    "token": ""
+    "token": "",
+    "repository": ""
   }
 }
