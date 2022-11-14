@@ -5,11 +5,11 @@ const token = config.get('server.token');
 const default_branch = config.get('server.default_branch');
 const repository = config.get('server.repository');
 const octokit = new Octokit({auth: token});
-const start = async () => {
-    await Promise.resolve(octokit.request('PUT /repos/wabasoft/garuda4/branches/master/protection', {
-        owner: 'wabasoft',
-        repo: 'garuda4',
-        branch: 'master',
+const protectBranch = async () => {
+    await octokit.request('PUT /repos/' + organization + '/' + repository + '/branches/' + default_branch + '/protection', {
+        owner: organization,
+        repo: repository,
+        branch: default_branch,
         required_status_checks: {
             strict: true,
             private: true,
@@ -37,7 +37,7 @@ const start = async () => {
         required_conversation_resolution: true,
         lock_branch: true,
         allow_fork_syncing: true
-    }))
-    };
+    }).then(r  =>console.log('Repository updated'));
+};
 console.log('Repository ' + repository + ' updated successfully.');
-start().then(r => console.log('Repository updated'));
+protectBranch();
